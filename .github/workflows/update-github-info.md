@@ -20,6 +20,7 @@ tools:
     mode: local
     toolsets: [context, repos, pull_requests]
   bash: false
+  cli-proxy: false
   edit:
   web-fetch:
 network:
