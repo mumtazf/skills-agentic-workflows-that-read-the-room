@@ -29,7 +29,9 @@ The workflow uses `safe-outputs: create-pull-request`, so the agent can draft we
    > - Update the .github/workflows/update-github-info.md workflow.
    > - Keep its existing sources and network access.
    > - Tell agent to:
-   >   - web fetch https://awesome-copilot.github.com/workflows/
+   >   - Read the `workflows/` directory in `github/awesome-copilot` with
+   >     GitHub API tools (https://awesome-copilot.github.com/workflows/
+   >     redirects there).
    > - Add Awesome Copilot workflows to the sources:
    >   https://awesome-copilot.github.com/workflows/
    > - Add awesome-copilot.github.com to network.allowed without removing
@@ -84,6 +86,7 @@ The workflow uses `safe-outputs: create-pull-request`, so the agent can draft we
 
 - If the workflow fails before the agent starts, confirm `COPILOT_GITHUB_TOKEN` is configured as an Actions secret.
 - If compilation fails, make sure `.github/workflows/update-github-info.md` includes `safe-outputs`, `create-pull-request`, `workflow_dispatch`, and a `network` allowlist for the GitHub Blog and Awesome Copilot sources.
+- If `web_fetch` is unavailable, check the **Prefetch public GitHub feeds** step in the run logs. The agent should use the saved feeds and report an incomplete run if it still cannot verify a required source. Recompile the workflow after changing its Markdown.
 - If no pull request appears, open the failed workflow run from the **Actions** tab and review the logs.
 - If the pull request opens as a draft, that is expected. Mona should review generated website changes before they merge.
 
